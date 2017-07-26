@@ -1,0 +1,93 @@
+DROP DATABASE IF EXISTS oneposition_db;
+CREATE DATABASE oneposition_db;
+USE oneposition_db;
+CREATE TABLE user_manage(
+    sid int(11) not null auto_increment comment '用户sid',
+    user_name varchar(20) not null comment '用户名',
+    user_passwd char(100) not null comment '用户密码 加密存储',
+    register_time datetime not null,
+    user_status bit(1) default b'0' comment '用户状态',
+    primary key (sid)
+)engine=INNODB auto_increment=10001 charset=utf8;
+
+CREATE TABLE mv_collection(
+	sid int(11) not null auto_increment,
+	user_sid int(11) not null  comment '用户id',
+	id int(11) not null comment 'mv id',
+	title varchar(50) not null comment '标题',
+	engname varchar(50) comment '英文名',
+	summary varchar(50) not null comment '摘要',
+	createtime datetime,
+	collecttime datetime,
+	location varchar(50) comment '地点',
+	pic varchar(100) not null comment '图片链接',
+	pics varchar(50),
+	istopic tinyint(1) comment '是否是主题',
+	type varchar(50) comment '类型',
+	tag varchar(10) comment '标签',
+	category int(10) comment '种类',
+	commentcount int(11) comment '评论数',
+	sharecount int(11) comment '分享数',
+	prize varchar(50),
+	wantwatchnums int(10),
+	unwantwatchnums int(10),
+	picsCount int(10) comment '图片数',
+	primary key (sid)
+)engine=INNODB charset=utf8;
+
+//修改表结构，添加新的字段
+alter table user_manage add mobileNo varchar(11) not Null comment '手机号';
+alter table user_manage change mobileNo mobile_no varchar(11) not Null comment '手机号';
+ALTER TABLE user_manage DROP mobile_no;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DROP DATABASE IF EXISTS oneposition_db;
+CREATE DATABASE oneposition_db;
+USE oneposition_db;
+CREATE TABLE user_manage(
+    sid int(11) not null auto_increment,
+    user_name varchar(20) not null,
+    user_passwd char(100) not null,
+    register_time datetime not null,
+    user_status bit(1) default b'0',
+    primary key (sid)
+)engine=INNODB auto_increment=10001 charset=utf8;
+
+CREATE TABLE mv_collection(
+	sid int(11) not null auto_increment,
+	user_sid int(11) not null,
+	id int(11) not null comment 'mv id',
+	title varchar(50) not null,
+	engname varchar(50),
+	summary varchar(50) not null,
+	create_time datetime,
+	collect_time datetime,
+	location varchar(50),
+	pic varchar(100) not null,
+	pics varchar(50),
+	istopic tinyint(1),
+	type varchar(50),
+	tag varchar(10),
+	category int(10),
+	commentcount int(11),
+	sharecount int(11),
+	prize varchar(50),
+	wantwatchnums int(10),
+	unwantwatchnums int(10),
+	picsCount int(10),
+	primary key (sid)
+)engine=INNODB charset=utf8;

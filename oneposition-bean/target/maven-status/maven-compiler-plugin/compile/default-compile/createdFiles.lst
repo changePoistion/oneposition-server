@@ -1,0 +1,12 @@
+com\shopin\oneposition\bean\app\UserManageBean.class
+com\shopin\oneposition\bean\app\MvCollectionList.class
+com\shopin\oneposition\bean\app\MvCollectionBean.class
+com\shopin\oneposition\bean\app\MvPieceBean.class
+com\shopin\oneposition\bean\app\MovieDetailBean.class
+com\shopin\oneposition\bean\MovieListBean.class
+com\shopin\oneposition\bean\MovieSubTypeBean.class
+com\shopin\oneposition\bean\app\MovieNostalgiaBean.class
+com\shopin\oneposition\bean\app\UserBean.class
+com\shopin\oneposition\bean\app\UserRegisterResult.class
+com\shopin\oneposition\bean\app\MvPiecesBean.class
+com\shopin\oneposition\bean\app\BaseEntity.class

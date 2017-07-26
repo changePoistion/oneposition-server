@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopin.oneposition.mapper.UserManageBeanMapper">
+  <resultMap id="BaseResultMap" type="com.shopin.oneposition.bean.app.UserManageBean">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_passwd" jdbcType="CHAR" property="userPasswd" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="user_status" jdbcType="BIT" property="userStatus" />
+    <result column="mobile_no" jdbcType="VARCHAR" property="mobileNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sid, user_name, user_passwd, register_time, user_status, mobile_no
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_manage
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <select id="queryByUserPasswd" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_manage
+    where user_passwd = #{user_passwd,jdbcType=CHAR}
+  </select>
+  
+  <select id="queryByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_manage
+    where user_name = #{user_name,jdbcType=CHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_manage
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.shopin.oneposition.bean.app.UserManageBean">
+    insert into user_manage (sid, user_name, user_passwd, 
+      register_time, user_status, mobile_no)
+    values (#{sid,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPasswd,jdbcType=CHAR}, 
+      #{registerTime,jdbcType=TIMESTAMP}, #{userStatus,jdbcType=BIT}, #{mobileNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shopin.oneposition.bean.app.UserManageBean">
+    insert into user_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPasswd != null">
+        user_passwd,
+      </if>
+      <if test="registerTime != null">
+        register_time,
+      </if>
+      <if test="userStatus != null">
+        user_status,
+      </if>
+      <if test="mobileNo != null">
+        mobile_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPasswd != null">
+        #{userPasswd,jdbcType=CHAR},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=BIT},
+      </if>
+      <if test="mobileNo != null">
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shopin.oneposition.bean.app.UserManageBean">
+    update user_manage
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPasswd != null">
+        user_passwd = #{userPasswd,jdbcType=CHAR},
+      </if>
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=BIT},
+      </if>
+      <if test="mobileNo != null">
+        mobile_no = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shopin.oneposition.bean.app.UserManageBean">
+    update user_manage
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_passwd = #{userPasswd,jdbcType=CHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      user_status = #{userStatus,jdbcType=BIT}
+      mobile_no = #{mobileNo,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

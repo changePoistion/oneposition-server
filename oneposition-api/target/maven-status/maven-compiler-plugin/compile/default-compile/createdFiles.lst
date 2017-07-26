@@ -1,0 +1,15 @@
+com\shopin\oneposition\condition\BaseCondition.class
+com\shopin\oneposition\constants\InfoConstants.class
+com\shopin\oneposition\condition\MovieCondition.class
+com\shopin\oneposition\controller\UserManageController.class
+com\shopin\oneposition\httpclient\HttpClientUtil.class
+com\shopin\oneposition\utils\PageEntity.class
+com\shopin\oneposition\controller\MovieController.class
+com\shopin\oneposition\constants\Constants.class
+com\shopin\oneposition\controller\BaseController.class
+com\shopin\oneposition\enums\EnumServerMap.class
+com\shopin\oneposition\apiresult\BaseResponse.class
+com\shopin\oneposition\utils\MyRestTemplate.class
+com\shopin\oneposition\utils\RestTemplateUtils.class
+com\shopin\OnePositionApplication.class
+com\shopin\oneposition\enums\EnumCodeInfo.class

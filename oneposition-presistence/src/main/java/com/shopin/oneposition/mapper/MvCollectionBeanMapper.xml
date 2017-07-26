@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopin.oneposition.mapper.MvCollectionBeanMapper">
+	<resultMap id="BaseResultMap"
+		type="com.shopin.oneposition.bean.app.MvCollectionBean">
+		<id column="sid" jdbcType="INTEGER" property="sid" />
+		<result column="user_sid" jdbcType="INTEGER" property="userSid" />
+		<result column="id" jdbcType="INTEGER" property="id" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="engname" jdbcType="VARCHAR" property="engname" />
+		<result column="summary" jdbcType="VARCHAR" property="summary" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="collect_time" jdbcType="TIMESTAMP" property="collectTime" />
+		<result column="location" jdbcType="VARCHAR" property="location" />
+		<result column="pic" jdbcType="VARCHAR" property="pic" />
+		<result column="pics" jdbcType="VARCHAR" property="pics" />
+		<result column="istopic" jdbcType="BIT" property="istopic" />
+		<result column="type" jdbcType="VARCHAR" property="type" />
+		<result column="tag" jdbcType="VARCHAR" property="tag" />
+		<result column="category" jdbcType="INTEGER" property="category" />
+		<result column="commentcount" jdbcType="INTEGER" property="commentcount" />
+		<result column="sharecount" jdbcType="INTEGER" property="sharecount" />
+		<result column="prize" jdbcType="VARCHAR" property="prize" />
+		<result column="wantwatchnums" jdbcType="INTEGER" property="wantwatchnums" />
+		<result column="unwantwatchnums" jdbcType="INTEGER" property="unwantwatchnums" />
+		<result column="picsCount" jdbcType="INTEGER" property="picscount" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		sid, user_sid, id, title, engname, summary, create_time,
+		collect_time,
+		location,
+		pic, pics, istopic, type, tag, category,
+		commentcount, sharecount, prize,
+		wantwatchnums,
+		unwantwatchnums,
+		picsCount
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from mv_collection
+		where sid = #{sid,jdbcType=INTEGER}
+	</select>
+	<select id="selectAllCollected" parameterType="int" resultMap="BaseResultMap">
+		select * from mv_collection where user_sid =
+		#{user_sid,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectCollectedByIndex" parameterType="HashMap"
+		resultMap="BaseResultMap">
+		select * from mv_collection 
+		<where>
+		<if test="user_sid!=null">
+			and user_sid > 0
+		</if>
+		</where>
+		limit #{index},#{count}
+	</select>
+
+	<!-- <select id="selectByUserSidAndId" parameterType="java.lang.Integer" 
+		resultMap="BaseResultMap"> select <include refid="Base_Column_List" /> from 
+		mv_collection where user_sid = #{0,jdbcType=INTEGER} and id = #{1,jdbcType=INTEGER} 
+		</select> -->
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		mv_collection
+		where sid = #{sid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.shopin.oneposition.bean.app.MvCollectionBean">
+		insert into mv_collection
+		(sid, user_sid, id,
+		title, engname, summary,
+		create_time, collect_time,
+		location,
+		pic, pics, istopic, type,
+		tag, category, commentcount,
+		sharecount, prize, wantwatchnums,
+		unwantwatchnums, picsCount)
+		values
+		(#{sid,jdbcType=INTEGER}, #{userSid,jdbcType=INTEGER},
+		#{id,jdbcType=INTEGER},
+		#{title,jdbcType=VARCHAR},
+		#{engname,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{collectTime,jdbcType=TIMESTAMP},
+		#{location,jdbcType=VARCHAR},
+		#{pic,jdbcType=VARCHAR},
+		#{pics,jdbcType=VARCHAR}, #{istopic,jdbcType=BIT},
+		#{type,jdbcType=VARCHAR},
+		#{tag,jdbcType=VARCHAR},
+		#{category,jdbcType=INTEGER}, #{commentcount,jdbcType=INTEGER},
+		#{sharecount,jdbcType=INTEGER}, #{prize,jdbcType=VARCHAR},
+		#{wantwatchnums,jdbcType=INTEGER},
+		#{unwantwatchnums,jdbcType=INTEGER}, #{picscount,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.shopin.oneposition.bean.app.MvCollectionBean">
+		insert into mv_collection
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sid != null">
+				sid,
+			</if>
+			<if test="userSid != null">
+				user_sid,
+			</if>
+			<if test="id != null">
+				id,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="engname != null">
+				engname,
+			</if>
+			<if test="summary != null">
+				summary,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="collectTime != null">
+				collect_time,
+			</if>
+			<if test="location != null">
+				location,
+			</if>
+			<if test="pic != null">
+				pic,
+			</if>
+			<if test="pics != null">
+				pics,
+			</if>
+			<if test="istopic != null">
+				istopic,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="tag != null">
+				tag,
+			</if>
+			<if test="category != null">
+				category,
+			</if>
+			<if test="commentcount != null">
+				commentcount,
+			</if>
+			<if test="sharecount != null">
+				sharecount,
+			</if>
+			<if test="prize != null">
+				prize,
+			</if>
+			<if test="wantwatchnums != null">
+				wantwatchnums,
+			</if>
+			<if test="unwantwatchnums != null">
+				unwantwatchnums,
+			</if>
+			<if test="picscount != null">
+				picsCount,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sid != null">
+				#{sid,jdbcType=INTEGER},
+			</if>
+			<if test="userSid != null">
+				#{userSid,jdbcType=INTEGER},
+			</if>
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="engname != null">
+				#{engname,jdbcType=VARCHAR},
+			</if>
+			<if test="summary != null">
+				#{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="collectTime != null">
+				#{collectTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="location != null">
+				#{location,jdbcType=VARCHAR},
+			</if>
+			<if test="pic != null">
+				#{pic,jdbcType=VARCHAR},
+			</if>
+			<if test="pics != null">
+				#{pics,jdbcType=VARCHAR},
+			</if>
+			<if test="istopic != null">
+				#{istopic,jdbcType=BIT},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="tag != null">
+				#{tag,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				#{category,jdbcType=INTEGER},
+			</if>
+			<if test="commentcount != null">
+				#{commentcount,jdbcType=INTEGER},
+			</if>
+			<if test="sharecount != null">
+				#{sharecount,jdbcType=INTEGER},
+			</if>
+			<if test="prize != null">
+				#{prize,jdbcType=VARCHAR},
+			</if>
+			<if test="wantwatchnums != null">
+				#{wantwatchnums,jdbcType=INTEGER},
+			</if>
+			<if test="unwantwatchnums != null">
+				#{unwantwatchnums,jdbcType=INTEGER},
+			</if>
+			<if test="picscount != null">
+				#{picscount,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.shopin.oneposition.bean.app.MvCollectionBean">
+		update mv_collection
+		<set>
+			<if test="userSid != null">
+				user_sid = #{userSid,jdbcType=INTEGER},
+			</if>
+			<if test="id != null">
+				id = #{id,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="engname != null">
+				engname = #{engname,jdbcType=VARCHAR},
+			</if>
+			<if test="summary != null">
+				summary = #{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="collectTime != null">
+				collect_time = #{collectTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="location != null">
+				location = #{location,jdbcType=VARCHAR},
+			</if>
+			<if test="pic != null">
+				pic = #{pic,jdbcType=VARCHAR},
+			</if>
+			<if test="pics != null">
+				pics = #{pics,jdbcType=VARCHAR},
+			</if>
+			<if test="istopic != null">
+				istopic = #{istopic,jdbcType=BIT},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="tag != null">
+				tag = #{tag,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				category = #{category,jdbcType=INTEGER},
+			</if>
+			<if test="commentcount != null">
+				commentcount = #{commentcount,jdbcType=INTEGER},
+			</if>
+			<if test="sharecount != null">
+				sharecount = #{sharecount,jdbcType=INTEGER},
+			</if>
+			<if test="prize != null">
+				prize = #{prize,jdbcType=VARCHAR},
+			</if>
+			<if test="wantwatchnums != null">
+				wantwatchnums = #{wantwatchnums,jdbcType=INTEGER},
+			</if>
+			<if test="unwantwatchnums != null">
+				unwantwatchnums = #{unwantwatchnums,jdbcType=INTEGER},
+			</if>
+			<if test="picscount != null">
+				picsCount = #{picscount,jdbcType=INTEGER},
+			</if>
+		</set>
+		where sid = #{sid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.shopin.oneposition.bean.app.MvCollectionBean">
+		update
+		mv_collection
+		set user_sid = #{userSid,jdbcType=INTEGER},
+		id =
+		#{id,jdbcType=INTEGER},
+		title = #{title,jdbcType=VARCHAR},
+		engname =
+		#{engname,jdbcType=VARCHAR},
+		summary = #{summary,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		collect_time =
+		#{collectTime,jdbcType=TIMESTAMP},
+		location =
+		#{location,jdbcType=VARCHAR},
+		pic = #{pic,jdbcType=VARCHAR},
+		pics =
+		#{pics,jdbcType=VARCHAR},
+		istopic = #{istopic,jdbcType=BIT},
+		type =
+		#{type,jdbcType=VARCHAR},
+		tag = #{tag,jdbcType=VARCHAR},
+		category =
+		#{category,jdbcType=INTEGER},
+		commentcount =
+		#{commentcount,jdbcType=INTEGER},
+		sharecount =
+		#{sharecount,jdbcType=INTEGER},
+		prize = #{prize,jdbcType=VARCHAR},
+		wantwatchnums = #{wantwatchnums,jdbcType=INTEGER},
+		unwantwatchnums =
+		#{unwantwatchnums,jdbcType=INTEGER},
+		picsCount =
+		#{picscount,jdbcType=INTEGER}
+		where sid = #{sid,jdbcType=INTEGER}
+	</update>
+</mapper>
